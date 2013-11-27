@@ -2,6 +2,7 @@
 
 var argv = require('optimist').argv;
 var through = require('through');
+var split = require('split');
 
 var term = [argv.t || argv.term].concat(argv._).join(' ').trim();
 
@@ -17,16 +18,25 @@ var jsonParse = function (str) {
   try {
     return JSON.parse(str);
   } catch (e) {
-    return '{}';
+    return {};
   }
 };
 
-process.stdin.pipe(through(function (flannelOutput) {
+var processLine = function (flannelOutput) {
 
-  extractData(flannelOutput)
-    .map(jsonParse)
-    .forEach(function (data) {
-      this.queue(require('util').inspect(data, { depth: null, colors: true }) + '\n\n');
-    }.bind(this));
+  if (!flannelOutput.length) return;
 
-})).pipe(process.stdout);
+  try {
+    this.queue(require('util').inspect(jsonParse(flannelOutput), {
+      depth: null, colors: true
+    }) + '\n\n');
+  } catch (e) {
+    this.queue('Error, failed to inspect ' + flannelOutput);
+  }
+
+};
+
+process.stdin
+  .pipe(split())
+  .pipe(through(processLine))
+  .pipe(process.stdout);

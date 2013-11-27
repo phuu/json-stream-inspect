@@ -22,16 +22,16 @@ var jsonParse = function (str) {
   }
 };
 
-var processLine = function (flannelOutput) {
+var processLine = function (line) {
 
-  if (!flannelOutput.length) return;
+  if (!line.length) return;
 
   try {
-    this.queue(require('util').inspect(jsonParse(flannelOutput), {
+    this.queue(require('util').inspect(jsonParse(line), {
       depth: null, colors: true
     }) + '\n\n');
   } catch (e) {
-    this.queue('Error, failed to inspect ' + flannelOutput);
+    this.queue('Error, failed to inspect ' + line);
   }
 
 };

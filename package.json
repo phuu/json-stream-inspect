@@ -1,10 +1,12 @@
 {
-  "name": "flannel-inspect",
+  "name": "json-stream-inspect",
   "version": "0.0.0",
-  "description": "",
+  "description": "Inspect a JSON stream.",
   "main": "index.js",
   "bin": {
-    "flannel-inspect": "index.js"
+    "jsi": "json-stream-inspect",
+    "json-inspect": "json-stream-inspect",
+    "json-stream-inspect": "json-stream-inspect"
   },
   "author": "Tom Ashworth <ta@twitter.com>",
   "license": "BSD-2-Clause",

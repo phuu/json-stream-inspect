@@ -2,10 +2,8 @@
   "name": "json-stream-inspect",
   "version": "0.0.0",
   "description": "Inspect a JSON stream.",
-  "main": "index.js",
+  "preferGlobal": true,
   "bin": {
-    "jsi": "json-stream-inspect",
-    "json-inspect": "json-stream-inspect",
     "json-stream-inspect": "json-stream-inspect"
   },
   "author": "Tom Ashworth <ta@twitter.com>",
